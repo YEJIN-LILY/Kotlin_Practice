@@ -1,6 +1,6 @@
 # 1주차 과제
 
-* 필수과제: SignUpActivity 만들기(2020.10.12 완료)
+🍀 필수과제: SignUpActivity 만들기(2020.10.12 완료)
   - 실습화면
   <img src="https://user-images.githubusercontent.com/57944153/96099862-af4dc380-0f0e-11eb-93e6-817f0825ed16.png" width="300" height="400"/>
   <img src="https://user-images.githubusercontent.com/57944153/96100851-c640e580-0f0f-11eb-9693-c22315bebf38.png" width="300" height="400"/>
