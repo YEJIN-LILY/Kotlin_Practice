@@ -1,6 +1,6 @@
 # 1주차 과제
 
-🍀 필수과제: SignUpActivity 만들기(2020.10.12 완료)
+🍀 **필수과제: SignUpActivity 만들기(2020.10.12 완료)**
   * 실습화면   
   <img src="https://user-images.githubusercontent.com/57944153/96099862-af4dc380-0f0e-11eb-93e6-817f0825ed16.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/96100851-c640e580-0f0f-11eb-9693-c22315bebf38.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/96100925-d953b580-0f0f-11eb-9b76-178f565ad86e.png" width="200" height="300"/>
   
@@ -38,7 +38,7 @@
         }
        ```   
        
-🍀 성장과제1: 화면이동+@(2020.10.13 완료)
+🍀 **성장과제1: 화면이동+@(2020.10.13 완료)**
  * 실습 화면   
  <img src="https://user-images.githubusercontent.com/57944153/96100925-d953b580-0f0f-11eb-9b76-178f565ad86e.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/96222798-dc11e180-0fc7-11eb-92b3-369349c353c8.png" width="200" height="300"/>
  
