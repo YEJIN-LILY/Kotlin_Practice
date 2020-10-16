@@ -15,24 +15,19 @@
         setContentView(R.layout.activity_sign_up)
 
         Button_SignUp.setOnClickListener{
-            val name=EditText_name?.text.toString()
-            val id=EditText_ID?.text.toString()
-            val pw=EditText_PW?.text.toString()
+            val id = EditText_ID?.text.toString()
+            val pw = EditText_PW?.text.toString()
 
-            val len_name=name.length
-            val len_id=id.length
-            val len_pw=pw.length
-
-            if(len_name>0&&len_id>0&&len_pw>0) {
+            if (id.isNullOrBlank() || pw.isNullOrBlank()) {
+                Toast.makeText(this, "빈칸이 있습니다.", Toast.LENGTH_SHORT).show()
+            } else {
                 Toast.makeText(this, "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
-                val intent=Intent()
-                intent.putExtra("id",id)
-                intent.putExtra("pw",pw)
-                setResult(Activity.RESULT_OK,intent)
+                val intent = Intent()
+                intent.putExtra("id", id)
+                intent.putExtra("pw", pw)
+                setResult(Activity.RESULT_OK, intent)
                 finish()
             }
-            else
-                Toast.makeText(this,"빈칸이 있습니다.",Toast.LENGTH_SHORT).show()
              }
           }
         }
@@ -58,4 +53,57 @@
     }
     ```
     
+🍀 **성장과제2: 자동 로그인(2020.10.16 완료)**
+* 실습 화면   
+<img src="https://user-images.githubusercontent.com/57944153/96227956-d7e9c200-0fcf-11eb-9122-efabe5c7421e.png" width="200" height="300"/>   
 
+- 구현코드
+  + MySharedPreferences.kt
+  ```
+  object MySharedPreferences{
+    private val MY_ACCOUNT : String = "account"
+
+    fun setUserId(context: Context, input: String) {
+        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        val editor : SharedPreferences.Editor = prefs.edit()
+        editor.putString("MY_ID", input)
+        editor.commit()
+    }
+
+    fun getUserId(context: Context): String {
+        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        return prefs.getString("MY_ID", "").toString()
+    }
+
+    fun setUserPass(context: Context, input: String) {
+        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        val editor : SharedPreferences.Editor = prefs.edit()
+        editor.putString("MY_PASS", input)
+        editor.commit()
+    }
+
+    fun getUserPass(context: Context): String {
+        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        return prefs.getString("MY_PASS", "").toString()
+    }
+
+    fun clearUser(context: Context) {
+        val prefs : SharedPreferences = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        val editor : SharedPreferences.Editor = prefs.edit()
+        editor.clear()
+        editor.commit()
+    }
+   }
+  ```
+  + MainActivity using MySharedPreferences
+  ```
+  if(MySharedPreferences.getUserId(this).isNullOrBlank() || MySharedPreferences.getUserPass(this).isNullOrBlank()) { //자동로그인x
+            Login()
+        }
+        else { // SharedPreferences 안에 값이 저장되어 있을 때 -> HomeActivity로 이동
+            Toast.makeText(this, "${MySharedPreferences.getUserId(this)}님 자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+  ```
