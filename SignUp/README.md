@@ -36,4 +36,26 @@
              }
           }
         }
-       ```
+       ```   
+       
+🍀 성장과제1: 화면이동+@(2020.10.13 완료)
+ * 실습 화면   
+ <img src="https://user-images.githubusercontent.com/57944153/96100925-d953b580-0f0f-11eb-9b76-178f565ad86e.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/96222798-dc11e180-0fc7-11eb-92b3-369349c353c8.png" width="200" height="300"/>
+ 
+ - 구현코드
+   - onActivityResult
+   ```
+   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode==Activity.RESULT_OK){
+            when(requestCode){
+                100->{
+                    EditText_ID.setText(data!!.getStringExtra("id").toString())
+                    EditText_PW.setText(data!!.getStringExtra("pw").toString())
+                }
+            }
+        }
+    }
+    ```
+    
+
