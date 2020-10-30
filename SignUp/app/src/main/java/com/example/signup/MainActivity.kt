@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         if(MySharedPreferences.getUserId(this).isNullOrBlank() || MySharedPreferences.getUserPass(this).isNullOrBlank()) { //자동로그인x
             Login()
         }
-        else { // SharedPreferences 안에 값이 저장되어 있을 때 -> HomeActivity로 이동
+        else { // SharedPreferences 안에 값이 저장되어 있을 때 -> rcv_ProfileActivity 이동
             Toast.makeText(this, "${MySharedPreferences.getUserId(this)}님 자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, rcv_ProfileActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 MySharedPreferences.setUserId(this, EditText_ID.text.toString())
                 MySharedPreferences.setUserPass(this, EditText_PW.text.toString())
                 Toast.makeText(this, "${MySharedPreferences.getUserId(this)}님 로그인 되었습니다.", Toast.LENGTH_SHORT).show()
-                var intent = Intent(this, HomeActivity::class.java)
+                var intent = Intent(this, rcv_ProfileActivity::class.java)
                 startActivity(intent)
                 finish()
             }
