@@ -107,3 +107,53 @@
             finish()
         }
   ```
+
+# 2주차 과제
+
+🍀 **필수과제: RecyclerView 상세화면 이동(2020.10.27 완료)**
+* 실습 화면   
+<img src="https://user-images.githubusercontent.com/57944153/97669019-8ad51800-1ac6-11eb-983d-fd7a0c57f069.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/97669111-beb03d80-1ac6-11eb-9a02-598dc38f4682.png" width="200" height="300"/>   
+
+- 구현코드   
+  + rcv_ProfileActivity.kt   
+  ```
+  profileAdapter.setItemClickListener(object:ProfileAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                val item=profileAdapter.data[position]
+
+                val intent = Intent(v.context,DetailActivity::class.java)
+                intent.putExtra("title", item.title)
+                intent.putExtra("subTitle", item.subTitle)
+                intent.putExtra("date", item.date)
+                intent.putExtra("contents", item.contents)
+                startActivity(intent)
+            }
+        })
+   ```   
+   + ProfileAdapter.kt
+   ```
+   override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
+        val item=data[position]
+        holder.onBind(item)
+
+        holder.itemView.setOnClickListener{
+            itemClickListener.onClick(it,position)
+        }
+    }
+    ```   
+    + DetailActivity.kt   
+    ```
+    class DetailActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_detail)
+
+        TextView_title.setText(intent.getStringExtra("title").toString())
+        TextView_subTitle.setText(intent.getStringExtra("subTitle").toString())
+        TextView_date.setText(intent.getStringExtra("date").toString())
+        TextView_contents.setText(intent.getStringExtra("contents").toString())
+       }
+   }
+   ```   
+
