@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_brush"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:checked="false"
+        android:title="Brush"/>
+
+    <item
+        android:id="@+id/menu_camera"
+        android:icon="@drawable/ic_accessibility_black_24dp"
+        android:checked="false"
+        android:title="Camera"/>
+
+    <item
+        android:id="@+id/menu_checkbox"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:checked="false"
+        android:title="CheckBox"/>
+</menu>
