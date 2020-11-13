@@ -52,8 +52,10 @@
             android:hint="비밀번호를 입력하세요" />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+
+    <Button
         android:layout_width="250dp"
+        android:checked="false"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:id="@+id/Button_LogIn"
@@ -62,6 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="50dp"
         android:text="로그인"
+        android:background="@drawable/btn_red"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView

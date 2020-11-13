@@ -1,5 +1,6 @@
 package com.example.signup
 
+import BottomDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -38,6 +39,11 @@ class MyPageActivity : AppCompatActivity() {
                 }
             bottom_viewpager.currentItem=index
             true
+        }
+
+        fab.setOnClickListener{
+            val bottomSheet=BottomDialog()
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
         }
     }
 }
