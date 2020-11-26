@@ -285,3 +285,133 @@
     }
   }
   ```
+
+# 6주차 과제
+
+🍀 **필수과제: 로그인/회원가입 API 사용(2020.11.26 완료)**
+* 실습 화면
+
+<img src="https://user-images.githubusercontent.com/57944153/100315824-a6b3d700-2ffc-11eb-97c6-38d1baeca464.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/100315865-b92e1080-2ffc-11eb-8369-d80f385cd89c.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/100315912-cea33a80-2ffc-11eb-8238-62c1ccab8258.png" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/57944153/100315949-e37fce00-2ffc-11eb-912b-d3d4ddf875b0.png" width="200" height="300"/>   
+
+<img src="https://user-images.githubusercontent.com/57944153/100316031-11651280-2ffd-11eb-975c-96a272887037.png" width="500" height="300"/>   
+<img src="https://user-images.githubusercontent.com/57944153/100316126-39ed0c80-2ffd-11eb-99c8-7faa216c8cce.png" width="500" height="300"/>
+
+- 구현코드
+   + RequestLoginData.kt   
+   ```
+   data class RequestLoginData(
+       val email:String,
+       val password:String
+   )
+   ```
+   
+   + RequestSignupData.kt
+   ```
+   data class RequestSignupData(
+       val email:String,
+       val password:String
+   )
+   ```
+   
+   + ResponseLoginData.kt
+   ```
+   data class ResponseLoginData(
+       val data: Data,
+       val status: Int,
+       val success: Boolean
+   ) {
+       data class Data(
+           val email: String,
+           val password: String
+       )
+   }
+   ```
+   
+   + ResponseSignupData.kt
+   ```
+   data class ResponseSignupData(
+       val data: Data,
+       val status: Int,
+       val success: Boolean
+   ) {
+       data class Data(
+           val email: String,
+           val password: String
+       )
+   }
+   ```
+   
+   + ServiceImpl
+   ```
+   object ServiceImpl {
+
+    var retrofit = Retrofit.Builder()
+        .baseUrl("http://15.164.83.210:3000")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    var service: SoptService = retrofit.create(SoptService::class.java)
+   }
+   ```
+   
+   + SoptService
+   ```
+   interface SoptService{
+
+    //회원가입
+    @Headers("Content-Type:application/json")
+    @POST("/users/signup")
+    fun postSignup(
+        @Body body:RequestSignupData
+    ):Call<ResponseSignupData>
+    //로그인
+    @Headers("Content-Type:application/json")
+    @POST("/users/signin")
+    fun postLogin(
+        @Body body : RequestLoginData
+    ) : Call<ResponseLoginData>
+   }
+   ```
+   
+   + MainActivity.kt
+   ```
+   fun Login() {
+        Button_LogIn.setOnClickListener {
+            if (EditText_ID.text.isNullOrBlank() || EditText_PW.text.isNullOrBlank()) { //빈칸이 있을 경우
+                Toast.makeText(this@MainActivity, "아이디와 비밀번호를 모두 입력하세요", Toast.LENGTH_SHORT).show()
+            } else { //처음 로그인
+                val email = EditText_ID.text.toString()
+                val password = EditText_PW.text.toString()
+
+                ServiceImpl.service.postLogin(
+                    RequestLoginData(
+                        email = email,
+                        password = password
+                    )
+                )
+                    .enqueue(
+                        object : Callback<ResponseLoginData> {
+                            override fun onFailure(call: Call<ResponseLoginData>, t: Throwable) {
+                                Log.d("통신 실패", t.toString())
+                            }
+
+                            override fun onResponse(
+                                call: Call<ResponseLoginData>,
+                                response: Response<ResponseLoginData>
+                            ) {
+                                if (response.isSuccessful) {
+                                    Log.d("login", response.body().toString())
+                                    val intent =
+                                        Intent(this@MainActivity, MyPageActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+
+                        }
+                    )
+            }
+        }
+
+    }
+    ```
