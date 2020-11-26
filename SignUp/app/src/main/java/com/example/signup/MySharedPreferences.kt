@@ -36,4 +36,5 @@ object MySharedPreferences{
         editor.clear()
         editor.commit()
     }
+
 }
